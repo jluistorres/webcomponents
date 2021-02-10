@@ -1,0 +1,217 @@
+*,
+:after,
+:before {
+    box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #bbb;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(78, 78, 78, 0.05);
+}
+
+html,
+body {
+    font-family: "Roboto", sans-serif;
+    font-size: 1rem;
+    font-weight: 300;
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    background-image: url(https://gtms.co.uk/wp-content/uploads/2015/06/dotted-worldmap.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center top;
+    background-attachment: fixed;
+}
+
+#page-container {
+    position: relative;
+    min-height: 100vh;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+#content-wrap {
+    padding-bottom: 2.5rem;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 2.5rem;
+    background: rgba(255, 255, 255, 0.7);
+    border-top: 1px solid #eee;
+    padding: 10px 25px;
+}
+
+header,
+.content {
+    padding: 25px;
+}
+
+header {
+    font-size: 1.5rem;
+    background: #190a47;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    font-family: "Raleway", sans-serif;
+    margin: 0;
+}
+
+header .search {
+    border: 0;
+    padding: 15px;
+    border-radius: 1.5rem;
+    outline: none;
+    transition: all ease 1s;
+}
+
+header .search:focus {
+    width: 300px;
+}
+
+small {
+    font-size: 0.8em;
+    font-weight: 100;
+}
+
+.countries {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+wc-country {
+    animation: animar ease 1s;
+}
+
+.popup-container {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 999;
+}
+
+.popup {
+    position: fixed;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    width: 500px;
+    background: #fff;
+    border-radius: 1rem;
+    font-family: "Roboto", sans-serif;
+    animation: zoom ease 0.3s;
+}
+.popup.zoomOut {
+    animation: zoomOut ease 0.5s;
+}
+
+@keyframes zoom {
+    0% {
+        opacity: 0.2;
+        transform: translate(-50%, -200%) scale(4);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+@keyframes zoomOut {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    30% {
+        transform: translate(-50%, -50%) scale(0.5);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(4);
+    }
+}
+
+.popup h4 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 300;
+}
+
+.popup .title,
+.popup .content {
+    padding: 25px;
+}
+
+.popup .close {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    border: 0;
+    background: transparent;
+    outline: none;
+    cursor: pointer;
+    user-select: none;
+    font-size: 3rem;
+    font-weight: 100;
+    font-family: "Roboto", sans-serif;
+    line-height: 2.5rem;
+}
+
+@keyframes animar {
+    0% {
+        transform: scale(0.3);
+        opacity: 0.5;
+    }
+    80% {
+        transform: scale(1.1);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .countries {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    header {
+        flex-direction: column;
+    }
+
+    header .search {
+        margin-top: 0.2rem;
+        width: 100%;
+    }
+
+    header .search:focus {
+        width: 100%;
+    }
+}
+
+@media (max-width: 400px) {
+    .countries {
+        grid-template-columns: 100%;
+    }
+}

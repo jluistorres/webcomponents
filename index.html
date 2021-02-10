@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paises</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Roboto:wght@100;300;400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    </link>
+    <script src="components/wc-country/component.js"></script>
+    <script src="js/index.js"></script>
+</head>
+
+<body>
+    <div id="page-container">
+        <div id="content-wrap">
+            <header>
+                <nav>
+                    <h1>Países del mundo</h1>
+                    <small>Información de países con idioma español</small>
+                </nav>
+                <div class="search">
+                    <input type="text" class="search" placeholder="Buscar..." />
+                </div>
+            </header>
+            <div class="content">
+                <div class="countries"></div>
+                <!-- Popup -->
+                <div class="popup-container">
+                    <div class="popup">
+                        <div class="title">
+                            <h4>País</h4>
+                            <button type="button" class="close">&times;</button>
+                        </div>
+                        <div class="content">
+                            <h5 style="margin: 0;">Continente</h5>
+                            <h1 style="margin: 0;" class="region"></h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer>Copyright &copy; 2021</footer>
+    </div>
+</body>
+
+</html>
