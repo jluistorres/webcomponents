@@ -24,6 +24,7 @@ async function get() {
 
     let pageData = countries.slice((pagination.page - 1) * pagination.size, pagination.page * pagination.size);
 
+    document.querySelector('.pagination').style.display = pagination.total > 1 ? 'flex' : 'none';
     document.querySelector('.pagination .info').innerHTML = 'Página ' + pagination.page + ' de ' + pagination.total;
 
     let elem = document.querySelector('.countries');
