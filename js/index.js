@@ -67,12 +67,6 @@ window.onload = function () {
         }
     });
 
-    let actions = function (e) {
-        console.log(e.target.className);
-        if (e.target.className === 'previous') previous();
-        else next();
-    };
-
-    document.querySelector('.previous').addEventListener('click', actions);
-    document.querySelector('.next').addEventListener('click', actions);
+    document.querySelector('.previous').addEventListener('click', previous);
+    document.querySelector('.next').addEventListener('click', next);
 };
