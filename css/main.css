@@ -78,10 +78,15 @@ header .search {
     padding: 15px;
     border-radius: 1.5rem;
     outline: none;
-    transition: all ease 1s;
 }
 
-header .search:focus {
+header input {
+    transition: all ease 0.3s;
+    width: 200px;
+    display: inline-block;
+}
+
+header input:focus {
     width: 300px;
 }
 
