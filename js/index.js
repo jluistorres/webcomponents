@@ -1,41 +1,59 @@
-//let model = {};
+let pagination = {
+    page: 1,
+    size: 12,
+    total: 0
+};
+
+let search;
+let data = [];
 
 async function getCounties() {
     let res = await fetch('https://restcountries.eu/rest/v2/lang/es');
     return res.json();
 }
 
-function get(search) {
-    getCounties().then(res => {
-        // console.log(res);
+async function get() {
+    if (!data.length) {
+        data = await getCounties();
+    }
 
-        let elem = document.querySelector('.countries');
-        elem.innerHTML = "";
+    search = (search || '').toLowerCase();
+    let countries = data.filter(function (x) { return x.nativeName.toLowerCase().startsWith(search) });
 
-        search = (search || '').toLowerCase();
-        let countries = res
-            .filter(function (x) { return x.nativeName.toLowerCase().indexOf(search) != -1 })
-            .slice(0, 12);
+    pagination.total = Math.ceil(countries.length / pagination.size);
 
-        if (countries.length) {
-            countries.forEach(function (data) {
-                let item = document.createElement('wc-country');
-                item.value = data;
-                
-                //p.setAttribute('data', JSON.stringify(country));
-                
-                // item.setAttribute('name', data.nativeName);
-                // item.setAttribute('flag', data.flag);
-                // item.setAttribute('capital', data.capital);
-                // item.setAttribute('region', data.region);
-                // item.setAttribute('population', data.population);
+    let pageData = countries.slice((pagination.page - 1) * pagination.size, pagination.page * pagination.size);
 
-                elem.appendChild(item);
-            });
-        } else {
-            elem.innerHTML = "No hay resultados de la búsqueda";
-        }
-    });
+    document.querySelector('.pagination .info').innerHTML = 'Página ' + pagination.page + ' de ' + pagination.total;
+
+    let elem = document.querySelector('.countries');
+    elem.innerHTML = "";
+
+    if (pageData.length) {
+        pageData.forEach(function (val) {
+            let item = document.createElement('wc-country');
+            item.value = val;
+
+            elem.appendChild(item);
+        });
+    } else {
+        elem.innerHTML = "No hay resultados de la búsqueda";
+    }
+
+}
+
+function previous() {
+    if (pagination.page > 1) {
+        pagination.page--;
+        get();
+    }
+}
+
+function next() {
+    if (pagination.page < pagination.total) {
+        pagination.page++;
+        get();
+    }
 }
 
 window.onload = function () {
@@ -43,7 +61,18 @@ window.onload = function () {
 
     document.querySelector('.search').addEventListener('keyup', function (e) {
         if (e.keyCode === 13) {
-            get(e.target.value);
+            search = e.target.value;
+            pagination.page = 1;
+            get();
         }
     });
+
+    let actions = function (e) {
+        console.log(e.target.className);
+        if (e.target.className === 'previous') previous();
+        else next();
+    };
+
+    document.querySelector('.previous').addEventListener('click', actions);
+    document.querySelector('.next').addEventListener('click', actions);
 };
